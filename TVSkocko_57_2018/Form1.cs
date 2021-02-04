@@ -19,12 +19,10 @@ namespace TVSkocko_57_2018
         Participant p;
         Stopwatch sw = new Stopwatch();
         int[] combination = new int[4];
-
         int[] current = new int[4];
-
         int nom = 0;
-
         ForSerialization fs = new ForSerialization();
+
         public Form1()
         {
             InitializeComponent();
@@ -35,7 +33,7 @@ namespace TVSkocko_57_2018
         public void convertBitmapToIco()
         {
             Bitmap bmp;
-            using(bmp = new Bitmap(@"C:\Users\gogic\Desktop\TVSkocko_57_2018\bin\Debug\skocko.bmp"))
+            using(bmp = new Bitmap(@"skocko.bmp"))
             {
                 bmp.MakeTransparent(Color.White);
                 IntPtr icH = bmp.GetHicon();
@@ -89,10 +87,10 @@ namespace TVSkocko_57_2018
                 {
                     DataGridViewRow row = new DataGridViewRow();
                     row.Height = 40;
-                    row.Cells.Add(new DataGridViewImageCell { Value = new Bitmap(@"C:\Users\gogic\Desktop\TVSkocko_57_2018\bin\Debug\praznolevo.bmp") });
-                    row.Cells.Add(new DataGridViewImageCell { Value = new Bitmap(@"C:\Users\gogic\Desktop\TVSkocko_57_2018\bin\Debug\praznolevo.bmp") });
-                    row.Cells.Add(new DataGridViewImageCell { Value = new Bitmap(@"C:\Users\gogic\Desktop\TVSkocko_57_2018\bin\Debug\praznolevo.bmp") });
-                    row.Cells.Add(new DataGridViewImageCell { Value = new Bitmap(@"C:\Users\gogic\Desktop\TVSkocko_57_2018\bin\Debug\praznolevo.bmp") });
+                    row.Cells.Add(new DataGridViewImageCell { Value = new Bitmap(@"praznolevo.bmp") });
+                    row.Cells.Add(new DataGridViewImageCell { Value = new Bitmap(@"praznolevo.bmp") });
+                    row.Cells.Add(new DataGridViewImageCell { Value = new Bitmap(@"praznolevo.bmp") });
+                    row.Cells.Add(new DataGridViewImageCell { Value = new Bitmap(@"praznolevo.bmp") });
                     dataGridView1.Rows.Add(row);
                 }
 
@@ -111,10 +109,10 @@ namespace TVSkocko_57_2018
                 {
                     DataGridViewRow row = new DataGridViewRow();
                     row.Height = 40;
-                    row.Cells.Add(new DataGridViewImageCell { Value = new Bitmap(@"C:\Users\gogic\Desktop\TVSkocko_57_2018\bin\Debug\praznodesno.bmp") });
-                    row.Cells.Add(new DataGridViewImageCell { Value = new Bitmap(@"C:\Users\gogic\Desktop\TVSkocko_57_2018\bin\Debug\praznodesno.bmp") });
-                    row.Cells.Add(new DataGridViewImageCell { Value = new Bitmap(@"C:\Users\gogic\Desktop\TVSkocko_57_2018\bin\Debug\praznodesno.bmp") });
-                    row.Cells.Add(new DataGridViewImageCell { Value = new Bitmap(@"C:\Users\gogic\Desktop\TVSkocko_57_2018\bin\Debug\praznodesno.bmp") });
+                    row.Cells.Add(new DataGridViewImageCell { Value = new Bitmap(@"praznodesno.bmp") });
+                    row.Cells.Add(new DataGridViewImageCell { Value = new Bitmap(@"praznodesno.bmp") });
+                    row.Cells.Add(new DataGridViewImageCell { Value = new Bitmap(@"praznodesno.bmp") });
+                    row.Cells.Add(new DataGridViewImageCell { Value = new Bitmap(@"praznodesno.bmp") });
                     dataGridView2.Rows.Add(row);
                 }
 
@@ -146,25 +144,25 @@ namespace TVSkocko_57_2018
                     for (int j = 0; j < 4; j++)
                     {
                         if(fs.dg1[i,j] == 0)
-                            row.Cells.Add(new DataGridViewImageCell { Value = new Bitmap(@"C:\Users\gogic\Desktop\TVSkocko_57_2018\bin\Debug\praznolevo.bmp") });
+                            row.Cells.Add(new DataGridViewImageCell { Value = new Bitmap(@"praznolevo.bmp") });
 
                         if (fs.dg1[i,j] == 1)
-                            row.Cells.Add(new DataGridViewImageCell { Value = new Bitmap(@"C:\Users\gogic\Desktop\TVSkocko_57_2018\bin\Debug\hearts.bmp") });
+                            row.Cells.Add(new DataGridViewImageCell { Value = new Bitmap(@"hearts.bmp") });
 
                         if (fs.dg1[i,j] == 2)
-                            row.Cells.Add(new DataGridViewImageCell { Value = new Bitmap(@"C:\Users\gogic\Desktop\TVSkocko_57_2018\bin\Debug\karo.bmp") });
+                            row.Cells.Add(new DataGridViewImageCell { Value = new Bitmap(@"karo.bmp") });
 
                         if (fs.dg1[i,j] == 3)
-                            row.Cells.Add(new DataGridViewImageCell { Value = new Bitmap(@"C:\Users\gogic\Desktop\TVSkocko_57_2018\bin\Debug\pik.bmp") });
+                            row.Cells.Add(new DataGridViewImageCell { Value = new Bitmap(@"pik.bmp") });
 
                         if (fs.dg1[i,j] == 4)
-                            row.Cells.Add(new DataGridViewImageCell { Value = new Bitmap(@"C:\Users\gogic\Desktop\TVSkocko_57_2018\bin\Debug\tref.bmp") });
+                            row.Cells.Add(new DataGridViewImageCell { Value = new Bitmap(@"tref.bmp") });
 
                         if (fs.dg1[i,j] == 5)
-                            row.Cells.Add(new DataGridViewImageCell { Value = new Bitmap(@"C:\Users\gogic\Desktop\TVSkocko_57_2018\bin\Debug\zvezda.bmp") });
+                            row.Cells.Add(new DataGridViewImageCell { Value = new Bitmap(@"zvezda.bmp") });
 
                         if (fs.dg1[i,j] == 6)
-                            row.Cells.Add(new DataGridViewImageCell { Value = new Bitmap(@"C:\Users\gogic\Desktop\TVSkocko_57_2018\bin\Debug\skocko.bmp") });
+                            row.Cells.Add(new DataGridViewImageCell { Value = new Bitmap(@"skocko.bmp") });
                     }
                     dataGridView1.Rows.Add(row);
                 }
@@ -188,11 +186,11 @@ namespace TVSkocko_57_2018
                     for (int j = 0; j < 4; j++)
                     {
                         if (fs.dg2[i,j] == 0)
-                            row.Cells.Add(new DataGridViewImageCell { Value = new Bitmap(@"C:\Users\gogic\Desktop\TVSkocko_57_2018\bin\Debug\praznodesno.bmp") });
+                            row.Cells.Add(new DataGridViewImageCell { Value = new Bitmap(@"praznodesno.bmp") });
                         if (fs.dg2[i,j] == 1)
-                            row.Cells.Add(new DataGridViewImageCell { Value = new Bitmap(@"C:\Users\gogic\Desktop\TVSkocko_57_2018\bin\Debug\pogodak.bmp") });
+                            row.Cells.Add(new DataGridViewImageCell { Value = new Bitmap(@"pogodak.bmp") });
                         if (fs.dg2[i,j] == 2)
-                            row.Cells.Add(new DataGridViewImageCell { Value = new Bitmap(@"C:\Users\gogic\Desktop\TVSkocko_57_2018\bin\Debug\polupokodak.bmp") });
+                            row.Cells.Add(new DataGridViewImageCell { Value = new Bitmap(@"polupokodak.bmp") });
                     }
                     dataGridView2.Rows.Add(row);
                 }
@@ -211,10 +209,10 @@ namespace TVSkocko_57_2018
 
             DataGridViewRow row1 = new DataGridViewRow();
             row1.Height = 40;
-            row1.Cells.Add(new DataGridViewImageCell { Value = new Bitmap(@"C:\Users\gogic\Desktop\TVSkocko_57_2018\bin\Debug\praznolevo.bmp") });
-            row1.Cells.Add(new DataGridViewImageCell { Value = new Bitmap(@"C:\Users\gogic\Desktop\TVSkocko_57_2018\bin\Debug\praznolevo.bmp") });
-            row1.Cells.Add(new DataGridViewImageCell { Value = new Bitmap(@"C:\Users\gogic\Desktop\TVSkocko_57_2018\bin\Debug\praznolevo.bmp") });
-            row1.Cells.Add(new DataGridViewImageCell { Value = new Bitmap(@"C:\Users\gogic\Desktop\TVSkocko_57_2018\bin\Debug\praznolevo.bmp") });
+            row1.Cells.Add(new DataGridViewImageCell { Value = new Bitmap(@"praznolevo.bmp") });
+            row1.Cells.Add(new DataGridViewImageCell { Value = new Bitmap(@"praznolevo.bmp") });
+            row1.Cells.Add(new DataGridViewImageCell { Value = new Bitmap(@"praznolevo.bmp") });
+            row1.Cells.Add(new DataGridViewImageCell { Value = new Bitmap(@"praznolevo.bmp") });
             dataGridView4.Rows.Add(row1);
 
             //Popunjavanje desno DataGridViewa podacima iz baze podataka
@@ -254,9 +252,7 @@ namespace TVSkocko_57_2018
                 sw.Start();
             }
             else
-            {
                 MessageBox.Show("Niste uneli username igraca");
-            }
         }
         //provera koliko njih je na pravom, a koliko njih na pogresnom mestu
         public int[] checkAccuracy()
@@ -279,19 +275,15 @@ namespace TVSkocko_57_2018
 
             //the ones on right place
             for (int i = 0; i < 4; i++)
-            {
                 if (this.current[i] == this.combination[i])
                 {
                     placed[0]++;
                     indicator[i] = 1;
                     indicator1[i] = 1;
                 }
-            }
             //the ones on wrong place
             for (int i = 0; i < 4; i++)
-            {
                 for(int j = 0; j < 4; j++)
-                {
                     if(this.combination[i] == this.current[j] && indicator[i] == 0 && indicator1[j] == 0)
                     {
                         indicator1[j] = 1;
@@ -299,8 +291,6 @@ namespace TVSkocko_57_2018
                         placed[1]++;
                         break;
                     }
-                }
-            }
 
             if (placed[0] == 4)
             {
@@ -326,8 +316,7 @@ namespace TVSkocko_57_2018
             sw.Stop();
             float time = sw.ElapsedMilliseconds / 1000 + fs.time;
 
-            string upit = @"INSERT INTO Spisak_igraca(username, time, number_of_moves) VALUES 
-                            ('" + p.Username + "', " + time + ", " + (this.nom / 4) + ")";
+            string upit = @"INSERT INTO Spisak_igraca(username, time, number_of_moves) VALUES ('" + p.Username + "', " + time + ", " + (this.nom / 4) + ")";
 
             SqlCommand command = new SqlCommand(upit, instance);
             command.ExecuteNonQuery();
@@ -356,6 +345,7 @@ namespace TVSkocko_57_2018
             string conn = @"Data Source=(localdb)\seminarski;Initial Catalog=seminarski;Integrated Security=True";
             SqlConnection instance = new SqlConnection(conn);
             instance.Open();
+
             string upit = @"select top 10 username, time, number_of_moves from Spisak_igraca order by time, number_of_moves";
             SqlCommand command = new SqlCommand(upit, instance);
             SqlDataReader reader = command.ExecuteReader();
@@ -379,29 +369,17 @@ namespace TVSkocko_57_2018
             for (int i = 0; i < 4; i++)
             {
                 if (this.combination[i] == 0)
-                {
-                    dataGridView4.Rows[0].Cells[i] = new DataGridViewImageCell { Value = new Bitmap(@"C:\Users\gogic\Desktop\TVSkocko_57_2018\bin\Debug\hearts.bmp") };
-                }
+                    dataGridView4.Rows[0].Cells[i] = new DataGridViewImageCell { Value = new Bitmap(@"hearts.bmp") };
                 if (this.combination[i] == 1)
-                {
-                    dataGridView4.Rows[0].Cells[i] = new DataGridViewImageCell { Value = new Bitmap(@"C:\Users\gogic\Desktop\TVSkocko_57_2018\bin\Debug\karo.bmp") };
-                }
+                    dataGridView4.Rows[0].Cells[i] = new DataGridViewImageCell { Value = new Bitmap(@"karo.bmp") };
                 if (this.combination[i] == 2)
-                {
-                    dataGridView4.Rows[0].Cells[i] = new DataGridViewImageCell { Value = new Bitmap(@"C:\Users\gogic\Desktop\TVSkocko_57_2018\bin\Debug\pik.bmp") };
-                }
+                    dataGridView4.Rows[0].Cells[i] = new DataGridViewImageCell { Value = new Bitmap(@"pik.bmp") };
                 if (this.combination[i] == 3)
-                {
-                    dataGridView4.Rows[0].Cells[i] = new DataGridViewImageCell { Value = new Bitmap(@"C:\Users\gogic\Desktop\TVSkocko_57_2018\bin\Debug\tref.bmp") };
-                }
+                    dataGridView4.Rows[0].Cells[i] = new DataGridViewImageCell { Value = new Bitmap(@"tref.bmp") };
                 if (this.combination[i] == 4)
-                {
-                    dataGridView4.Rows[0].Cells[i] = new DataGridViewImageCell { Value = new Bitmap(@"C:\Users\gogic\Desktop\TVSkocko_57_2018\bin\Debug\zvezda.bmp") };
-                }
+                    dataGridView4.Rows[0].Cells[i] = new DataGridViewImageCell { Value = new Bitmap(@"zvezda.bmp") };
                 if (this.combination[i] == 5)
-                {
-                    dataGridView4.Rows[0].Cells[i] = new DataGridViewImageCell { Value = new Bitmap(@"C:\Users\gogic\Desktop\TVSkocko_57_2018\bin\Debug\skocko.bmp") };
-                }
+                    dataGridView4.Rows[0].Cells[i] = new DataGridViewImageCell { Value = new Bitmap(@"skocko.bmp") };
             }
         }
 
@@ -411,12 +389,12 @@ namespace TVSkocko_57_2018
             int i = 0;
             for(; i < placed[0]; i++)
             {
-                dataGridView2.Rows[this.nom / 4 - 1].Cells[i] = new DataGridViewImageCell { Value = new Bitmap(@"C:\Users\gogic\Desktop\TVSkocko_57_2018\bin\Debug\pogodak.bmp") };
+                dataGridView2.Rows[this.nom / 4 - 1].Cells[i] = new DataGridViewImageCell { Value = new Bitmap(@"pogodak.bmp") };
                 fs.dg2[this.nom / 4 - 1,i] = 1;
             }
             for (; i < placed[0] + placed[1]; i++)
             {
-                dataGridView2.Rows[this.nom / 4 - 1].Cells[i] = new DataGridViewImageCell { Value = new Bitmap(@"C:\Users\gogic\Desktop\TVSkocko_57_2018\bin\Debug\polupokodak.bmp") };
+                dataGridView2.Rows[this.nom / 4 - 1].Cells[i] = new DataGridViewImageCell { Value = new Bitmap(@"polupokodak.bmp") };
                 fs.dg2[this.nom / 4 - 1,i] = 2;
             }
         }
@@ -428,17 +406,17 @@ namespace TVSkocko_57_2018
             this.current[this.nom % 4] = znak - 1;
 
             if (znak == 1)
-                dataGridView1.Rows[this.nom / 4].Cells[this.nom % 4] = new DataGridViewImageCell { Value = new Bitmap(@"C:\Users\gogic\Desktop\TVSkocko_57_2018\bin\Debug\hearts.bmp") };
+                dataGridView1.Rows[this.nom / 4].Cells[this.nom % 4] = new DataGridViewImageCell { Value = new Bitmap(@"hearts.bmp") };
             else if (znak == 2)
-                dataGridView1.Rows[this.nom / 4].Cells[this.nom % 4] = new DataGridViewImageCell { Value = new Bitmap(@"C:\Users\gogic\Desktop\TVSkocko_57_2018\bin\Debug\karo.bmp") };
+                dataGridView1.Rows[this.nom / 4].Cells[this.nom % 4] = new DataGridViewImageCell { Value = new Bitmap(@"karo.bmp") };
             else if (znak == 3)
-                dataGridView1.Rows[this.nom / 4].Cells[this.nom % 4] = new DataGridViewImageCell { Value = new Bitmap(@"C:\Users\gogic\Desktop\TVSkocko_57_2018\bin\Debug\pik.bmp") };
+                dataGridView1.Rows[this.nom / 4].Cells[this.nom % 4] = new DataGridViewImageCell { Value = new Bitmap(@"pik.bmp") };
             else if (znak == 4)
-                dataGridView1.Rows[this.nom / 4].Cells[this.nom % 4] = new DataGridViewImageCell { Value = new Bitmap(@"C:\Users\gogic\Desktop\TVSkocko_57_2018\bin\Debug\tref.bmp") };
+                dataGridView1.Rows[this.nom / 4].Cells[this.nom % 4] = new DataGridViewImageCell { Value = new Bitmap(@"tref.bmp") };
             else if (znak == 5)
-                dataGridView1.Rows[this.nom / 4].Cells[this.nom % 4] = new DataGridViewImageCell { Value = new Bitmap(@"C:\Users\gogic\Desktop\TVSkocko_57_2018\bin\Debug\zvezda.bmp") };
+                dataGridView1.Rows[this.nom / 4].Cells[this.nom % 4] = new DataGridViewImageCell { Value = new Bitmap(@"zvezda.bmp") };
             else if (znak == 6)
-                dataGridView1.Rows[this.nom / 4].Cells[this.nom % 4] = new DataGridViewImageCell { Value = new Bitmap(@"C:\Users\gogic\Desktop\TVSkocko_57_2018\bin\Debug\skocko.bmp") };
+                dataGridView1.Rows[this.nom / 4].Cells[this.nom % 4] = new DataGridViewImageCell { Value = new Bitmap(@"skocko.bmp") };
 
             this.nom++;
 
@@ -492,7 +470,6 @@ namespace TVSkocko_57_2018
         private void button8_Click(object sender, EventArgs e)
         {
             this.giveMeSolution();
-
             button1.Enabled = false;
             button2.Enabled = false;
             button3.Enabled = false;
@@ -545,9 +522,7 @@ namespace TVSkocko_57_2018
                 MessageBox.Show("Poslednja sacuvana igrica uspesno obrisana");
             }
             else
-            {
                 MessageBox.Show("Nemate sta da obrisete");
-            }
         }
 
         //brisanje podataka iz baze podataka
@@ -555,7 +530,6 @@ namespace TVSkocko_57_2018
         {
             this.deleteFromDatabase();
             dataGridView3.Rows.Clear();
-
             List<Participant> p = this.giveMeTop10();
 
             foreach (var part in p)
