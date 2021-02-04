@@ -1,0 +1,10 @@
+C:\Users\gogic\Desktop\TVSkocko_57_2018\bin\Debug\TVSkocko_57_2018.exe.config
+C:\Users\gogic\Desktop\TVSkocko_57_2018\bin\Debug\TVSkocko_57_2018.exe
+C:\Users\gogic\Desktop\TVSkocko_57_2018\bin\Debug\TVSkocko_57_2018.pdb
+C:\Users\gogic\Desktop\TVSkocko_57_2018\obj\Debug\TVSkocko_57_2018.csprojAssemblyReference.cache
+C:\Users\gogic\Desktop\TVSkocko_57_2018\obj\Debug\TVSkocko_57_2018.Form1.resources
+C:\Users\gogic\Desktop\TVSkocko_57_2018\obj\Debug\TVSkocko_57_2018.Properties.Resources.resources
+C:\Users\gogic\Desktop\TVSkocko_57_2018\obj\Debug\TVSkocko_57_2018.csproj.GenerateResource.cache
+C:\Users\gogic\Desktop\TVSkocko_57_2018\obj\Debug\TVSkocko_57_2018.csproj.CoreCompileInputs.cache
+C:\Users\gogic\Desktop\TVSkocko_57_2018\obj\Debug\TVSkocko_57_2018.exe
+C:\Users\gogic\Desktop\TVSkocko_57_2018\obj\Debug\TVSkocko_57_2018.pdb
