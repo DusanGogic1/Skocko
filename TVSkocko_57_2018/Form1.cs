@@ -32,13 +32,28 @@ namespace TVSkocko_57_2018
             nom = 0;
         }
 
+        public void convertBitmapToIco()
+        {
+            Bitmap bmp;
+            using(bmp = new Bitmap(@"C:\Users\gogic\Desktop\TVSkocko_57_2018\bin\Debug\skocko.bmp"))
+            {
+                bmp.MakeTransparent(Color.White);
+                IntPtr icH = bmp.GetHicon();
+                Icon ico = Icon.FromHandle(icH);
+                this.Icon = ico;
+            }
+        }
+
         private void Form1_Load(object sender, EventArgs e)
         {
+            this.convertBitmapToIco();
+
+            //serijalizacija podataka
             string filePath = "data.save";
             DataSerializer dataSerializer = new DataSerializer();
-
-
             fs = dataSerializer.BinaryDeserialize(filePath) as ForSerialization;
+
+            //nema sta da se serijalizuje
             if (fs == null)
             {
                 this.nom = 0;
@@ -49,19 +64,17 @@ namespace TVSkocko_57_2018
                 button5.Enabled = false;
                 button6.Enabled = false;
 
+                //priprema za mogucu buducu serijalizaciju
                 fs = new ForSerialization();
                 Random rand = new Random();
-                this.p.Username = fs.Username;
 
                 combination[0] = rand.Next(0, 6);
                 combination[1] = rand.Next(0, 6);
                 combination[2] = rand.Next(0, 6);
                 combination[3] = rand.Next(0, 6);
-
                 fs.combination = this.combination;
 
-
-
+                //popunjavanje levog DataGridViewa
                 dataGridView1.Columns.Add("column1", "Column 1");
                 dataGridView1.Columns.Add("column2", "Column 2");
                 dataGridView1.Columns.Add("column3", "Column 3");
@@ -83,8 +96,7 @@ namespace TVSkocko_57_2018
                     dataGridView1.Rows.Add(row);
                 }
 
-
-
+                //popunjavanje srednjeg DataGridViewa
                 dataGridView2.Columns.Add("column1", "Column 1");
                 dataGridView2.Columns.Add("column2", "Column 2");
                 dataGridView2.Columns.Add("column3", "Column 3");
@@ -104,19 +116,19 @@ namespace TVSkocko_57_2018
                     row.Cells.Add(new DataGridViewImageCell { Value = new Bitmap(@"C:\Users\gogic\Desktop\TVSkocko_57_2018\bin\Debug\praznodesno.bmp") });
                     row.Cells.Add(new DataGridViewImageCell { Value = new Bitmap(@"C:\Users\gogic\Desktop\TVSkocko_57_2018\bin\Debug\praznodesno.bmp") });
                     dataGridView2.Rows.Add(row);
-
                 }
 
             }
             else
             {
-
+                //imalo je sta da se serijalizuje
                 textBox1.Visible = false;
                 label1.Visible = false;
                 button7.Visible = false;
                 this.nom = fs.nom;
                 this.combination = fs.combination;
 
+                //preslikavanje levog DataGridViewa iz fajla
                 dataGridView1.Columns.Add("column1", "Column 1");
                 dataGridView1.Columns.Add("column2", "Column 2");
                 dataGridView1.Columns.Add("column3", "Column 3");
@@ -157,6 +169,7 @@ namespace TVSkocko_57_2018
                     dataGridView1.Rows.Add(row);
                 }
 
+                //preslikavanje desnog DataGridViewa iz fajla
                 dataGridView2.Columns.Add("column1", "Column 1");
                 dataGridView2.Columns.Add("column2", "Column 2");
                 dataGridView2.Columns.Add("column3", "Column 3");
@@ -185,6 +198,7 @@ namespace TVSkocko_57_2018
                 }
             }
 
+            //popunjavanje donjeg DataGridViewa
             dataGridView4.Columns.Add("column1", "Column 1");
             dataGridView4.Columns.Add("column2", "Column 2");
             dataGridView4.Columns.Add("column3", "Column 3");
@@ -203,6 +217,7 @@ namespace TVSkocko_57_2018
             row1.Cells.Add(new DataGridViewImageCell { Value = new Bitmap(@"C:\Users\gogic\Desktop\TVSkocko_57_2018\bin\Debug\praznolevo.bmp") });
             dataGridView4.Rows.Add(row1);
 
+            //Popunjavanje desno DataGridViewa podacima iz baze podataka
             dataGridView3.Rows.Clear();
             List<Participant> p = this.giveMeTop10();
 
@@ -219,9 +234,11 @@ namespace TVSkocko_57_2018
 
         private void button7_Click(object sender, EventArgs e)
         {
+            //Unos imena igraca i omogucavanje dalje igre
             if (textBox1.Text != "")
             {
                 this.p.Username = textBox1.Text;
+                this.fs.Username = textBox1.Text;
 
                 button1.Enabled = true;
                 button2.Enabled = true;
@@ -241,7 +258,7 @@ namespace TVSkocko_57_2018
                 MessageBox.Show("Niste uneli username igraca");
             }
         }
-
+        //provera koliko njih je na pravom, a koliko njih na pogresnom mestu
         public int[] checkAccuracy()
         {
             int[] placed = new int[2];
@@ -300,6 +317,7 @@ namespace TVSkocko_57_2018
             return placed;
         }
 
+        //unos igraca u bazu podataka
         private void insertIntoDatabase()
         {
             string conn = @"Data Source=(localdb)\seminarski;Initial Catalog=seminarski;Integrated Security=True";
@@ -316,6 +334,21 @@ namespace TVSkocko_57_2018
             instance.Close();
         }
 
+        //brisanje svih igraca iz baze podataka
+        public void deleteFromDatabase()
+        {
+            string conn = @"Data Source=(localdb)\seminarski;Initial Catalog=seminarski;Integrated Security=True";
+            SqlConnection instance = new SqlConnection(conn);
+            instance.Open();
+
+            string upit = @"DELETE FROM Spisak_igraca WHERE 1=1";
+
+            SqlCommand command = new SqlCommand(upit, instance);
+            command.ExecuteNonQuery();
+            instance.Close();
+        }
+
+        //lista top 10 najboljih igraca sortirana po vremenu i broju poteza
         private List<Participant> giveMeTop10()
         {
             List<Participant> p = new List<Participant>();
@@ -323,11 +356,8 @@ namespace TVSkocko_57_2018
             string conn = @"Data Source=(localdb)\seminarski;Initial Catalog=seminarski;Integrated Security=True";
             SqlConnection instance = new SqlConnection(conn);
             instance.Open();
-
             string upit = @"select top 10 username, time, number_of_moves from Spisak_igraca order by time, number_of_moves";
-
             SqlCommand command = new SqlCommand(upit, instance);
-
             SqlDataReader reader = command.ExecuteReader();
 
             while (reader.Read())
@@ -343,6 +373,7 @@ namespace TVSkocko_57_2018
             return p;
         }
 
+        //ispis resenja u donji DataGridView
         private void giveMeSolution()
         {
             for (int i = 0; i < 4; i++)
@@ -374,6 +405,7 @@ namespace TVSkocko_57_2018
             }
         }
 
+        //popunjavanje srednjeg DataGridViewa na osnovu unetih simbola u levom DataGridViewu
         public void fillRight(int[] placed)
         {
             int i = 0;
@@ -389,12 +421,25 @@ namespace TVSkocko_57_2018
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        //unos simbola u levi DGV i u trenutnu kombinaciju + provera da li se doslo do kraja i kako su popunjeni
+        public void insertCurrent(int znak)
         {
-            fs.dg1[this.nom / 4,this.nom % 4] = 1;
+            fs.dg1[this.nom / 4, this.nom % 4] = znak;
+            this.current[this.nom % 4] = znak - 1;
 
-            this.current[this.nom % 4] = 0;
-            dataGridView1.Rows[this.nom / 4].Cells[this.nom % 4] = new DataGridViewImageCell { Value = new Bitmap(@"C:\Users\gogic\Desktop\TVSkocko_57_2018\bin\Debug\hearts.bmp") };
+            if (znak == 1)
+                dataGridView1.Rows[this.nom / 4].Cells[this.nom % 4] = new DataGridViewImageCell { Value = new Bitmap(@"C:\Users\gogic\Desktop\TVSkocko_57_2018\bin\Debug\hearts.bmp") };
+            else if (znak == 2)
+                dataGridView1.Rows[this.nom / 4].Cells[this.nom % 4] = new DataGridViewImageCell { Value = new Bitmap(@"C:\Users\gogic\Desktop\TVSkocko_57_2018\bin\Debug\karo.bmp") };
+            else if (znak == 3)
+                dataGridView1.Rows[this.nom / 4].Cells[this.nom % 4] = new DataGridViewImageCell { Value = new Bitmap(@"C:\Users\gogic\Desktop\TVSkocko_57_2018\bin\Debug\pik.bmp") };
+            else if (znak == 4)
+                dataGridView1.Rows[this.nom / 4].Cells[this.nom % 4] = new DataGridViewImageCell { Value = new Bitmap(@"C:\Users\gogic\Desktop\TVSkocko_57_2018\bin\Debug\tref.bmp") };
+            else if (znak == 5)
+                dataGridView1.Rows[this.nom / 4].Cells[this.nom % 4] = new DataGridViewImageCell { Value = new Bitmap(@"C:\Users\gogic\Desktop\TVSkocko_57_2018\bin\Debug\zvezda.bmp") };
+            else if (znak == 6)
+                dataGridView1.Rows[this.nom / 4].Cells[this.nom % 4] = new DataGridViewImageCell { Value = new Bitmap(@"C:\Users\gogic\Desktop\TVSkocko_57_2018\bin\Debug\skocko.bmp") };
+
             this.nom++;
 
             if (this.nom % 4 == 0)
@@ -412,133 +457,38 @@ namespace TVSkocko_57_2018
                 button5.Enabled = false;
                 button6.Enabled = false;
             }
+        }
+        private void button1_Click(object sender, EventArgs e)
+        {
+            this.insertCurrent(1);
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            fs.dg1[this.nom / 4,this.nom % 4] = 2;
-
-            this.current[this.nom % 4] = 1;
-            dataGridView1.Rows[this.nom / 4].Cells[this.nom % 4] = new DataGridViewImageCell { Value = new Bitmap(@"C:\Users\gogic\Desktop\TVSkocko_57_2018\bin\Debug\karo.bmp") };
-            this.nom++;
-
-            if (this.nom % 4 == 0)
-            {
-                int[] placed = this.checkAccuracy();
-                this.fillRight(placed);
-            }
-
-            if (this.nom >= 24)
-            {
-                button1.Enabled = false;
-                button2.Enabled = false;
-                button3.Enabled = false;
-                button4.Enabled = false;
-                button5.Enabled = false;
-                button6.Enabled = false;
-            }
+            this.insertCurrent(2);
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            fs.dg1[this.nom / 4,this.nom % 4] = 3;
-
-            this.current[this.nom % 4] = 2;
-            dataGridView1.Rows[this.nom / 4].Cells[this.nom % 4] = new DataGridViewImageCell { Value = new Bitmap(@"C:\Users\gogic\Desktop\TVSkocko_57_2018\bin\Debug\pik.bmp") };
-            this.nom++;
-
-            if (this.nom % 4 == 0)
-            {
-                int[] placed = this.checkAccuracy();
-                this.fillRight(placed);
-            }
-
-            if (this.nom >= 24)
-            {
-                button1.Enabled = false;
-                button2.Enabled = false;
-                button3.Enabled = false;
-                button4.Enabled = false;
-                button5.Enabled = false;
-                button6.Enabled = false;
-            }
+            this.insertCurrent(3);
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
-            fs.dg1[this.nom / 4,this.nom % 4] = 4;
-
-            this.current[this.nom % 4] = 3;
-            dataGridView1.Rows[this.nom / 4].Cells[this.nom % 4] = new DataGridViewImageCell { Value = new Bitmap(@"C:\Users\gogic\Desktop\TVSkocko_57_2018\bin\Debug\tref.bmp") };
-            this.nom++;
-
-            if (this.nom % 4 == 0)
-            {
-                int[] placed = this.checkAccuracy();
-                this.fillRight(placed);
-            }
-
-            if (this.nom >= 24)
-            {
-                button1.Enabled = false;
-                button2.Enabled = false;
-                button3.Enabled = false;
-                button4.Enabled = false;
-                button5.Enabled = false;
-                button6.Enabled = false;
-            }
+            this.insertCurrent(4);
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
-            fs.dg1[this.nom / 4,this.nom % 4] = 5;
-
-            this.current[this.nom % 4] = 4;
-            dataGridView1.Rows[this.nom / 4].Cells[this.nom % 4] = new DataGridViewImageCell { Value = new Bitmap(@"C:\Users\gogic\Desktop\TVSkocko_57_2018\bin\Debug\zvezda.bmp") };
-            this.nom++;
-
-            if (this.nom % 4 == 0)
-            {
-                int[] placed = this.checkAccuracy();
-                this.fillRight(placed);
-            }
-
-            if (this.nom >= 24)
-            {
-                button1.Enabled = false;
-                button2.Enabled = false;
-                button3.Enabled = false;
-                button4.Enabled = false;
-                button5.Enabled = false;
-                button6.Enabled = false;
-            }
+            this.insertCurrent(5);
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
-            fs.dg1[this.nom / 4,this.nom % 4] = 6;
-
-            this.current[this.nom % 4] = 5;
-            dataGridView1.Rows[this.nom / 4].Cells[this.nom % 4] = new DataGridViewImageCell { Value = new Bitmap(@"C:\Users\gogic\Desktop\TVSkocko_57_2018\bin\Debug\skocko.bmp") };
-            this.nom++;
-
-            if (this.nom % 4 == 0)
-            {
-                int[] placed = this.checkAccuracy();
-                this.fillRight(placed);
-            }
-
-            if (this.nom >= 24)
-            {
-                button1.Enabled = false;
-                button2.Enabled = false;
-                button3.Enabled = false;
-                button4.Enabled = false;
-                button5.Enabled = false;
-                button6.Enabled = false;
-            }
+            this.insertCurrent(6);
         }
 
+        //ispis resenja
         private void button8_Click(object sender, EventArgs e)
         {
             this.giveMeSolution();
@@ -551,6 +501,7 @@ namespace TVSkocko_57_2018
             button6.Enabled = false;
         }
 
+        //stvaranje nove igre
         private void button9_Click(object sender, EventArgs e)
         {
             dataGridView1.Rows.Clear();
@@ -565,11 +516,13 @@ namespace TVSkocko_57_2018
             this.Form1_Load(sender, e);
         }
 
+        //zatvaranje igre
         private void button10_Click(object sender, EventArgs e)
         {
             this.Close();
         }
 
+        //serijalizacija igre
         private void button11_Click(object sender, EventArgs e)
         {
             sw.Stop();
@@ -582,6 +535,7 @@ namespace TVSkocko_57_2018
             MessageBox.Show("Igrica sacuvana uspesno");
         }
 
+        //brisanje poslednje sacuvane igre
         private void button12_Click(object sender, EventArgs e)
         {
 
@@ -594,6 +548,25 @@ namespace TVSkocko_57_2018
             {
                 MessageBox.Show("Nemate sta da obrisete");
             }
+        }
+
+        //brisanje podataka iz baze podataka
+        private void button13_Click(object sender, EventArgs e)
+        {
+            this.deleteFromDatabase();
+            dataGridView3.Rows.Clear();
+
+            List<Participant> p = this.giveMeTop10();
+
+            foreach (var part in p)
+            {
+                DataGridViewRow row = (DataGridViewRow)dataGridView3.Rows[0].Clone();
+                row.Cells[0].Value = part.Username;
+                row.Cells[1].Value = part.Time;
+                row.Cells[2].Value = part.NumberOfMoves;
+                dataGridView3.Rows.Add(row);
+            }
+
         }
     }
 }

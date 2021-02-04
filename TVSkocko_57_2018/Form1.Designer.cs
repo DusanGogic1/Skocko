@@ -52,6 +52,7 @@ namespace TVSkocko_57_2018
             this.dataGridView4 = new System.Windows.Forms.DataGridView();
             this.button11 = new System.Windows.Forms.Button();
             this.button12 = new System.Windows.Forms.Button();
+            this.button13 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).BeginInit();
@@ -270,7 +271,7 @@ namespace TVSkocko_57_2018
             // 
             // button12
             // 
-            this.button12.Location = new System.Drawing.Point(469, 373);
+            this.button12.Location = new System.Drawing.Point(621, 373);
             this.button12.Name = "button12";
             this.button12.Size = new System.Drawing.Size(113, 40);
             this.button12.TabIndex = 18;
@@ -278,11 +279,23 @@ namespace TVSkocko_57_2018
             this.button12.UseVisualStyleBackColor = true;
             this.button12.Click += new System.EventHandler(this.button12_Click);
             // 
+            // button13
+            // 
+            this.button13.Location = new System.Drawing.Point(621, 419);
+            this.button13.Name = "button13";
+            this.button13.Size = new System.Drawing.Size(113, 34);
+            this.button13.TabIndex = 19;
+            this.button13.Text = "Obrisi podatke za igrace";
+            this.button13.UseVisualStyleBackColor = true;
+            this.button13.Click += new System.EventHandler(this.button13_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(865, 512);
+            this.Controls.Add(this.button13);
             this.Controls.Add(this.button12);
             this.Controls.Add(this.button11);
             this.Controls.Add(this.dataGridView4);
@@ -303,7 +316,7 @@ namespace TVSkocko_57_2018
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "TvSkocko";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
@@ -338,6 +351,7 @@ namespace TVSkocko_57_2018
         private System.Windows.Forms.DataGridView dataGridView4;
         private System.Windows.Forms.Button button11;
         private System.Windows.Forms.Button button12;
+        private System.Windows.Forms.Button button13;
     }
 }
 
